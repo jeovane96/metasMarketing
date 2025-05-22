@@ -27,7 +27,7 @@ st.markdown("""
     ">
         <img src="https://i0.wp.com/catagua.com.br/wp-content/uploads/2019/12/catagua-solucoes-imobiliarias.png?w=1280&ssl=1" 
              alt="Logo Catagua" style="width: 180px; height: auto;">
-        <h1 style="margin: 0;">| Metas de Venda</h1>
+        <h1 style="margin: 0;">| Metas Marketing</h1>
     </div>
 """, unsafe_allow_html=True)
 
