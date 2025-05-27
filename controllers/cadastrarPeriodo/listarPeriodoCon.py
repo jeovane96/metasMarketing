@@ -22,7 +22,7 @@ def selecionarPeriodo():
 
     for row in cursor.fetchall():
         customerList.append(
-            sistema.metas(
+            sistema.periodo(
                 row[0],
                 row[1],
                 row[2],

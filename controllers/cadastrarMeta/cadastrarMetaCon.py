@@ -10,7 +10,8 @@ def insertMetas(insert_metas):
     cursor = conn.cursor()
     try:
         cursor.execute(""" 
-            INSERT INTO tb_metas (
+            INSERT INTO tb_metas_(
+                nm_meta,
                 empreendimento,
                 meta,           
                 mes_ano,    
@@ -22,9 +23,11 @@ def insertMetas(insert_metas):
                 %s,
                 %s,
                 %s,
+                %s,
                 %s
             )""",
-            (
+            (   
+                insert_metas.nm_meta,
                 insert_metas.empreendimento,
                 insert_metas.meta,          
                 insert_metas.mes_ano,       
@@ -42,11 +45,11 @@ def insertMetas(insert_metas):
         conn.close()
 
 
-def validacaoInsertMetaEmpreendimento(empreendimento, mes_ano):
+def validacaoInsertMetaEmpreendimento(nm_meta, empreendimento, mes_ano):
     conn   = psycopg2.connect(db.db_url)
     cursor = conn.cursor()
-    query  = "SELECT * FROM tb_metas WHERE empreendimento =%s AND mes_ano =%s"
-    cursor.execute(query, (empreendimento, mes_ano))
+    query  = "SELECT * FROM tb_metas WHERE nm_meta =%s AND empreendimento =%s AND mes_ano =%s"
+    cursor.execute(query, (nm_meta, empreendimento, mes_ano))
     validacao = cursor.fetchall()
     conn.commit()
     return validacao

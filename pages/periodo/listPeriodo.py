@@ -9,10 +9,10 @@ def ListPeriodo():
         customerList.append(
             [
                 item.id,         
-                item.periodo,    
+                item.periodo_mkt,    
                 item.mes_ano,    
-                item.observacao ,
-                item.user_insert,
+                item.observacao,
+                item.user,
                 item.dt_insert
             ]
         )

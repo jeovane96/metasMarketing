@@ -1,19 +1,17 @@
 import streamlit                as st
 import pages.user.acesso        as ValidacaoUsuario
 import controllers.create_tbl   as create_tbl
-import locale
 
-import pages.metas.createMetas as createMetas
-import pages.metas.listMetas   as listMetas
-import pages.periodo.createPeriodo as createPeriodo
-import pages.periodo.listPeriodo as listPeriodo
-
+import pages.metas.createMetas      as createMetas
+import pages.metas.listMetas        as listMetas
+import pages.periodo.createPeriodo  as createPeriodo
+import pages.periodo.listPeriodo    as listPeriodo
 
 # create_tbl.criar_tabelas_db()
 
 # --- Define layout baseado no login ---
 if "authenticated" in st.session_state and st.session_state["authenticated"]:
-    st.set_page_config(layout="wide")  # Modo WIDE quando autenticado
+    st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
 # Exibir a logo
 st.markdown("""
@@ -171,7 +169,7 @@ st.markdown("""
     section[data-testid="stSidebar"] {
         background: linear-gradient(135deg, #203764, #203764, #203764);
         width: 212px !important;
-        min-width: 212px !important;
+        min-width: 270px !important;
         max-width: 212px !important;
         resize: none !important;
         overflow: hidden !important;
@@ -184,6 +182,14 @@ st.markdown("""
         font-weight: bold;
         margin-bottom: 20px;
     }
+            
+    /* Somente os botões da sidebar */
+    section[data-testid="stSidebar"] button {
+        font-size: 12px !important;
+        padding: 8px 15px !important;
+        width: 100% !important;
+        height: auto !important;
+    }      
             
     </style>
 
@@ -208,12 +214,11 @@ if "authenticated" in st.session_state and st.session_state["authenticated"]:
         <div class="header-container">
             🔑 {st.session_state.get("user", "")}
         </div>
-    """, unsafe_allow_html=True)
-
+        """, unsafe_allow_html=True
+    )
 
 # Pequeno espaço para ajuste
 st.write("")
-
 
 def acesso_tela():
 
@@ -221,8 +226,8 @@ def acesso_tela():
 
     st.sidebar.markdown('<div class="sidebar-title">📂 Navegação</div>', unsafe_allow_html=True)
 
-    metas_button   = st.sidebar.button("🎯 Metas", use_container_width=True)
-    periodo_button = st.sidebar.button("📆 Período", use_container_width=True)
+    metas_button   = st.sidebar.button("**🎯 Metas**", use_container_width=True)
+    periodo_button = st.sidebar.button("**📆 Período**", use_container_width=True)
 
     if "active_page" not in st.session_state:
         st.session_state["active_page"] = ""
@@ -230,7 +235,6 @@ def acesso_tela():
         st.session_state["active_page"] = "telaMetas"
     elif periodo_button:
         st.session_state["active_page"] = "telaPeriodo"
-
 
     if st.session_state["active_page"] == "telaMetas":
         inserir, excluir, consultar = st.tabs(["Inserir", "Excluir", "Consultar"])
