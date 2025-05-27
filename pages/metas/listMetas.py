@@ -11,6 +11,7 @@ def ListMetas():
                 item.id,
                 item.empreendimento,
                 item.mes_ano,
+                item.tp_meta,
                 item.meta,
                 item.observacao,
                 item.user,
@@ -20,7 +21,7 @@ def ListMetas():
 
     df = pd.DataFrame(
         customerList,
-        columns=['ID', 'Empreendimento', 'Mês/Ano', 'Meta', 'Observação', 'Usuário', 'Data']
+        columns=['ID', 'Empreendimento', 'Mês/Ano', 'Tipo da Meta', 'Meta', 'Observação', 'Usuário', 'Data de Cadastro']
     )
 
     table_html = df.to_html(index=False, classes="table", border=1)

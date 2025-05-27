@@ -24,13 +24,14 @@ def criar_tabelas_db():
                 id               SERIAL PRIMARY KEY,
                 nm_meta          TEXT     NULL, 
                 empreendimento   TEXT     NULL,
+                tp_meta          TEXT     NULL,
                 meta             NUMERIC(5,4) NOT NULL,
                 mes_ano          TEXT     NULL,
                 observacao       TEXT     NULL,
                 user_insert      TEXT NOT NULL,
                 dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
             )''')
-        print("Tabela 'tb_metas_qtd_lead' criada com sucesso.")
+        print("Tabela 'tb_metas' criada com sucesso.")
 
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS empreendimento (

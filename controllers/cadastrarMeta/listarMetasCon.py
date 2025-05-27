@@ -9,10 +9,12 @@ def selecionarMetas():
     cursor = conn.cursor()
     cursor.execute("""
         SELECT 
-            id,            
+            id,     
+            nm_meta,       
             empreendimento,        
             mes_ano, 
-            meta,       
+            tp_meta,
+            ROUND(meta::numeric, 2) AS meta,       
             observacao,    
             user_insert,  
             TO_CHAR(dt_insert, 'DD/MM/YYYY') AS dt_insert     
@@ -30,7 +32,9 @@ def selecionarMetas():
                 row[3],
                 row[4],
                 row[5],
-                row[6]
+                row[6],
+                row[7],
+                row[8]
             )
         )
     

@@ -1,5 +1,4 @@
 import streamlit as st
-# import models.sistema as sistema
 from datetime import timedelta
 import controllers.database as db
 import psycopg2
@@ -10,9 +9,10 @@ def insertMetas(insert_metas):
     cursor = conn.cursor()
     try:
         cursor.execute(""" 
-            INSERT INTO tb_metas_(
+            INSERT INTO tb_metas(
                 nm_meta,
                 empreendimento,
+                tp_meta,
                 meta,           
                 mes_ano,    
                 observacao,    
@@ -24,11 +24,13 @@ def insertMetas(insert_metas):
                 %s,
                 %s,
                 %s,
+                %s,
                 %s
             )""",
             (   
                 insert_metas.nm_meta,
                 insert_metas.empreendimento,
+                insert_metas.tp_meta,
                 insert_metas.meta,          
                 insert_metas.mes_ano,       
                 insert_metas.observacao,    

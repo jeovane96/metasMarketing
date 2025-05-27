@@ -1,9 +1,10 @@
 class metas:
-    def __init__(self, id, nm_meta, empreendimento, mes_ano, meta, observacao, user, dt_insert):
+    def __init__(self, id, nm_meta, empreendimento, mes_ano, tp_meta, meta, observacao, user, dt_insert):
         self.id              = id
         self.nm_meta         = nm_meta
         self.empreendimento  = empreendimento
         self.mes_ano         = mes_ano
+        self.tp_meta         = tp_meta
         self.meta            = meta
         self.observacao      = observacao
         self.user            = user
