@@ -7,12 +7,15 @@ def criar_tabelas_db():
     cursor = conn.cursor()
 
     try:
-        # cursor.execute('''drop TABLE tb_metas''')
+        # cursor.execute('''drop TABLE tb_bi_periodo''')
+        # cursor.execute('''drop TABLE tb_bi_metas''')
+        # cursor.execute('''drop TABLE tb_bi_empreendimento''')
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS tb_periodo (
+            CREATE TABLE IF NOT EXISTS tb_bi_periodo (
                 id          SERIAL PRIMARY KEY,
                 periodo     TIMESTAMP NOT NULL,
                 mes_ano          TEXT     NULL,
+                in_ativo    TEXT NOT NULL DEFAULT 'S',
                 observacao  TEXT     NULL,
                 user_insert TEXT NOT NULL,
                 dt_insert   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
@@ -20,12 +23,12 @@ def criar_tabelas_db():
         print("Tabela 'tb_periodo' criada com sucesso.")
 
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS tb_metas (
+            CREATE TABLE IF NOT EXISTS tb_bi_metas (
                 id               SERIAL PRIMARY KEY,
                 nm_meta          TEXT     NULL, 
                 empreendimento   TEXT     NULL,
                 tp_meta          TEXT     NULL,
-                meta             NUMERIC(5,4) NOT NULL,
+                meta             NUMERIC(10,2) NOT NULL,
                 mes_ano          TEXT     NULL,
                 observacao       TEXT     NULL,
                 user_insert      TEXT NOT NULL,
@@ -34,104 +37,35 @@ def criar_tabelas_db():
         print("Tabela 'tb_metas' criada com sucesso.")
 
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS empreendimento (
+            CREATE TABLE IF NOT EXISTS tb_bi_usuario_area (
+                id            SERIAL PRIMARY KEY,
+                email         TEXT NOT  NULL, 
+                area_acesso   TEXT NOT NULL,
+                perfil        TEXT NOT  NULL,
+                user_insert   TEXT NOT NULL,
+                dt_insert     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
+            )''')
+        print("Tabela 'tb_bi_usuario_area' criada com sucesso.")
+
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS tb_bi_empreendimento (
                 id              SERIAL PRIMARY KEY,
                 empreendimento  TEXT NOT NULL
             )''')
         print("Tabela 'empreendimento' criada com sucesso.")
 
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_metas_qtd_lead (
-        #         id               SERIAL PRIMARY KEY,
-        #         empreendimento   TEXT     NULL,
-        #         meta             INTEGER NOT NULL,
-        #         mes_ano          TEXT     NULL,
-        #         observacao       TEXT     NULL,
-        #         user_insert      TEXT NOT NULL,
-        #         dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_metas_qtd_lead' criada com sucesso.")
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS tb_bi_suprimentos_contratos (
+                id                    SERIAL PRIMARY KEY,
+                cd_empresa            TEXT NOT  NULL, 
+                nu_contrato           TEXT NOT  NULL, 
+                vl_orcamento          NUMERIC(10,2) NOT NULL,
+                vl_primeira_proposta  NUMERIC(10,2) NOT NULL,
+                user_insert           TEXT NOT NULL,
+                dt_insert             TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
+            )''')
+        print("Tabela 'tb_bi_suprimentos_contratos' criada com sucesso.")
 
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_metas_part_mkt (
-        #         id               SERIAL PRIMARY KEY,
-        #         empreendimento   TEXT     NULL,
-        #         meta             NUMERIC(5,4) NOT NULL,
-        #         mes_ano          TEXT     NULL,
-        #         observacao       TEXT     NULL,
-        #         user_insert      TEXT NOT NULL,
-        #         dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_metas_part_mkt' criada com sucesso.")
-
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_metas_conv_lead_vend (
-        #         id               SERIAL PRIMARY KEY,
-        #         empreendimento   TEXT     NULL,
-        #         meta             NUMERIC(5,4) NOT NULL,
-        #         mes_ano          TEXT     NULL,
-        #         observacao       TEXT     NULL,
-        #         user_insert      TEXT NOT NULL,
-        #         dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_metas_conv_lead_vend' criada com sucesso.")
-
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_metas_qtd_vend_mkt (
-        #         id               SERIAL PRIMARY KEY,
-        #         empreendimento   TEXT     NULL,
-        #         meta             INTEGER NOT NULL,
-        #         mes_ano          TEXT     NULL,
-        #         observacao       TEXT     NULL,
-        #         user_insert      TEXT NOT NULL,
-        #         dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_metas_qtd_vend_mkt' criada com sucesso.")
-
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_metas_qtd_vend_com (
-        #         id               SERIAL PRIMARY KEY,
-        #         empreendimento   TEXT     NULL,
-        #         meta             INTEGER NOT NULL,
-        #         mes_ano          TEXT     NULL,
-        #         observacao       TEXT     NULL,
-        #         user_insert      TEXT NOT NULL,
-        #         dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_metas_qtd_vend_com' criada com sucesso.")
-
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_metas_aprov_lead (
-        #         id               SERIAL PRIMARY KEY,
-        #         empreendimento   TEXT     NULL,
-        #         meta             NUMERIC(5,4) NOT NULL,
-        #         mes_ano          TEXT     NULL,
-        #         observacao       TEXT     NULL,
-        #         user_insert      TEXT NOT NULL,
-        #         dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_metas_aprov_lead' criada com sucesso.")
-
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_metas_perda_auto (
-        #         id               SERIAL PRIMARY KEY,
-        #         empreendimento   TEXT     NULL,
-        #         meta             NUMERIC(5,4) NOT NULL,
-        #         mes_ano          TEXT     NULL,
-        #         observacao       TEXT     NULL,
-        #         user_insert      TEXT NOT NULL,
-        #         dt_insert        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_metas_perda_auto' criada com sucesso.")
-
-        # cursor.execute('''
-        #     CREATE TABLE IF NOT EXISTS tb_usuario (
-        #         id        SERIAL PRIMARY KEY,
-        #         email     TEXT NOT NULL,
-        #         senha     TEXT NOT NULL,
-        #         dt_insert TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours'
-        #     )''')
-        # print("Tabela 'tb_usuario' criada com sucesso.")
 
     except psycopg2.Error as e:
         print(f"Erro ao criar tabelas: {e}")

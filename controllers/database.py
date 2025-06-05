@@ -1,3 +1,1 @@
-import os
-
-db_url = os.getenv("DB_URL")
+db_url = "postgresql://postgres:postgres@192.168.125.36:5432/DW_HUB"

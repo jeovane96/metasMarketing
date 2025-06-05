@@ -1,24 +1,6 @@
 import streamlit as st
 import time
-import psycopg2
-import controllers.database as db
-
-
-def verificar_usuario(email, senha):
-    conn   = psycopg2.connect(db.db_url)
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT senha FROM tb_usuario WHERE email = %s AND senha = %s", (email, senha))
-    resultado = cursor.fetchone()
-
-    cursor.close()
-    conn.close()
-
-    # Se encontrou o usuário com e-mail e senha corretos, retorna True
-    return resultado is not None
-
-
-
+import controllers.user.usuarioCon as usuarioCon
 
 # Função para autenticação no Streamlit
 def authenticate_user():
@@ -37,6 +19,10 @@ def authenticate_user():
             <style>
             .title-container { display: flex; justify-content: center; text-align: center; height: 10vh; }
             .title-container h1 { font-size: 2em; }
+            body {
+                background: linear-gradient(180deg, #002f6c, #001b3a);
+                height: 100vh;
+            }
             </style>
         """, unsafe_allow_html=True)
         st.markdown('<div class="title-container"><h1>''</h1></div>', unsafe_allow_html=True)
@@ -48,37 +34,30 @@ def authenticate_user():
         with col2:
             email        = st.text_input("**E-mail**", key="login_email")
             password     = st.text_input("**Senha**", type="password", key="login_password")
+            area_acesso  = st.selectbox("**Área**", options=["Financeiro", "Recursos Humanos", "Suprimentos", "Engenharia", "Marketing", "Comercial", "Assistência Técnica"])
             login_button = st.button("Entrar")
 
             if login_button:
                 with st.spinner("Autenticando..."):
-                    autenticado = verificar_usuario(email, password)
+                    autenticado_usuario = usuarioCon.verificar_usuario(email, password)
+                    autenticado_usuario_area = usuarioCon.verificar_usuario_area(email, area_acesso)
                     time.sleep(3)
 
-                if autenticado:
+                if not autenticado_usuario_area:
+                    st.error('Usuário não tem acesso a área selecionada')
+                    st.stop()
+
+                if autenticado_usuario:
                     st.session_state["authenticated"] = True
-                    st.session_state["user"] = email
+                    st.session_state["user"]          = email
+                    st.session_state["area_acesso"]   = area_acesso
 
                     email = email.upper()
                     success_placeholder.success(f"Bem-vindo, **{email.upper()}** !")
-                    # success_placeholder.markdown(
-                    #     f"""
-                    #     <div style="
-                    #         padding: 10px;
-                    #         border-radius: 5px;
-                    #         --background-color: #F6FFD5; /* Cor verde personalizada */
-                    #         color: black; /* Texto branco */
-                    #         text-align: center;
-                    #         font-weight: bold;">
-                    #         <span style="color: black;">Bem-vindo, {email} !</span>
-                    #     </div>
-                    #     """,
-                    #     unsafe_allow_html=True
-                    # )
                     time.sleep(3)
                     success_placeholder.empty()  
                     login_placeholder.empty()  
-
+                
                     return True  
                 else:
                     st.error("E-mail ou senha inválidos.")

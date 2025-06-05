@@ -11,10 +11,11 @@ class metas:
         self.dt_insert       = dt_insert
 
 class periodo:
-    def __init__(self, id, periodo_mkt, mes_ano, observacao, user, dt_insert):
+    def __init__(self, id, periodo_mkt, mes_ano, in_ativo, observacao, user, dt_insert):
         self.id              = id
         self.periodo_mkt     = periodo_mkt
         self.mes_ano         = mes_ano
+        self.in_ativo        = in_ativo
         self.observacao      = observacao
         self.user            = user
         self.dt_insert       = dt_insert
@@ -23,3 +24,21 @@ class empreendimento_class:
     def __init__(self, id, empreendimento):
         self.id              = id
         self.empreendimento  = empreendimento
+
+class user:
+    def __init__(self, email, area_acesso, perfil, user_insert, dt_insert):
+        self.email       = email
+        self.area_acesso = area_acesso
+        self.perfil      = perfil
+        self.user_insert = user_insert
+        self.dt_insert   = dt_insert
+
+
+class suprimentos_contratos:
+    def __init__(self, cd_empresa, nu_contrato, vl_orcamento, vl_primeira_proposta, user_insert, dt_insert):
+        self.cd_empresa           = cd_empresa
+        self.nu_contrato          = nu_contrato
+        self.vl_orcamento         = vl_orcamento
+        self.vl_primeira_proposta = vl_primeira_proposta
+        self.user_insert          = user_insert
+        self.dt_insert            = dt_insert
