@@ -66,6 +66,20 @@ def criar_tabelas_db():
             )''')
         print("Tabela 'tb_bi_suprimentos_contratos' criada com sucesso.")
 
+    
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS tb_bi_comercial_metas (
+                id                          SERIAL PRIMARY KEY,
+                periodo                     TEXT NOT NULL,
+                empreendimento              TEXT NOT NULL,
+                agrupamento_empreendimento  TEXT NOT NULL,
+                meta                        INT NOT NULL,
+                considera_bi                TEXT NOT NULL,
+                dt_insert                   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP - INTERVAL '3 hours',
+                user_insert                 TEXT NOT NULL
+            )''')
+        print("Tabela 'tb_bi_comercial_metas' criada com sucesso.")
+
 
     except psycopg2.Error as e:
         print(f"Erro ao criar tabelas: {e}")
