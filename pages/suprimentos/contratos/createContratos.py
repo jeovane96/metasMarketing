@@ -1,9 +1,11 @@
 import streamlit as st
 import models.sistema as sistema
-import controllers.suprimentos.cadastrarContratosCon as cadastrarContratosCon
-import controllers.suprimentos.cadastrarContratosCon.listarContratos as listarContratos
 import time
 from datetime import datetime
+
+import controllers.suprimentos.cadastrarContratos.cadastrarContratosCon as cadastrarContratosCon
+import controllers.suprimentos.cadastrarContratos.listarContratosCon as listarContratosCon
+
 
 def createContratos():
 
@@ -12,7 +14,7 @@ def createContratos():
     def ListContratosFiltro():
         customerList = []
 
-        for item in listarContratos.selecionarTodosContratosFiltro():
+        for item in listarContratosCon.selecionarTodosContratosFiltro():
             customerList.append((item.cd_empresa, item.nu_contrato))
             
         return customerList
@@ -22,10 +24,10 @@ def createContratos():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        input_empresa = st.selectbox("**Empresa**", options=list(set([empresa[0] for empresa in empresa_contratos])), index=0, placeholder="Escolha a Empresa")
+        input_empresa = st.selectbox("**Empresa**", options=sorted(set([empresa[0] for empresa in empresa_contratos])), index=0, placeholder="Escolha a Empresa")
 
     with col2:
-        input_contratos = st.selectbox("**Contrato**", options=list(set([contratos[1] for contratos in empresa_contratos])), index=0, placeholder="Escolha o Contrato") 
+        input_contratos = st.selectbox("**Contrato**", options=sorted(set([contratos[1] for contratos in empresa_contratos])), index=0, placeholder="Escolha o Contrato") 
 
     with col3:
         input_vl_orcamento = st.number_input("**Orçamento**", step=0.01, format="%.2f")
@@ -47,11 +49,11 @@ def createContratos():
             return st.error("O campo da primeira proposta está sem valor")
 
         with st.spinner("Atualizando..."):   
-            sistema.cd_empresa      = input_empresa
-            sistema.nu_contrato     = input_contratos
-            sistema.empreendimento  = input_vl_orcamento 
-            sistema.tp_meta         = input_vl_primeira_proposta
-            sistema.user            = user
+            sistema.cd_empresa           = input_empresa
+            sistema.nu_contrato          = input_contratos
+            sistema.vl_orcamento         = input_vl_orcamento 
+            sistema.vl_primeira_proposta = input_vl_primeira_proposta
+            sistema.user_insert          = user
             cadastrarContratosCon.insertContratos(sistema)
             time.sleep(2) 
 

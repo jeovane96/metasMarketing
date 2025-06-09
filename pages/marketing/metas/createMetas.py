@@ -1,7 +1,7 @@
 import streamlit as st
 import models.sistema as sistema
 import controllers.marketing.cadastrarMeta.cadastrarMetaCon as cadastrarMetaCon
-import controllers.marketing.cadastrarMeta.listarEmpreendimentoCon as listarEmpreendimentoCon
+import controllers.listEmpreendimento as listarEmpreendimentoCon
 import time
 from datetime import datetime
 

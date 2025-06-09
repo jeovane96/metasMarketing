@@ -35,10 +35,23 @@ class user:
 
 
 class suprimentos_contratos:
-    def __init__(self, cd_empresa, nu_contrato, vl_orcamento, vl_primeira_proposta, user_insert, dt_insert):
+    def __init__(self, id, cd_empresa, nu_contrato, vl_orcamento, vl_primeira_proposta, user_insert, dt_insert):
+        self.id                   = id
         self.cd_empresa           = cd_empresa
         self.nu_contrato          = nu_contrato
         self.vl_orcamento         = vl_orcamento
         self.vl_primeira_proposta = vl_primeira_proposta
         self.user_insert          = user_insert
         self.dt_insert            = dt_insert
+
+    
+class comercial_metas:
+    def __init__(self, id, empreendimento, periodo, agrupamento_empreendimento, meta, considera_bi, dt_insert, user):
+        self.id                         = id
+        self.empreendimento             = empreendimento
+        self.periodo                    = periodo
+        self.agrupamento_empreendimento = agrupamento_empreendimento
+        self.meta                       = meta
+        self.considera_bi               = considera_bi
+        self.dt_insert                  = dt_insert
+        self.user                       = user

@@ -1,11 +1,11 @@
 import streamlit as st
-import controllers.suprimentos.cadastrarContratosCon.listarContratos as listarContratos
+import controllers.suprimentos.cadastrarContratos.listarContratosCon as listarContratosCon
 import pandas as pd
 
 def ListContratos():
     customerList = []
 
-    for item in listarContratos.selecionarContratos():
+    for item in listarContratosCon.selecionarContratos():
         customerList.append(
             [
             item.id, 

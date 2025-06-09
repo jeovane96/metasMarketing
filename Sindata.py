@@ -1,11 +1,9 @@
-import streamlit                        as st
-import pages.user.acesso                as ValidacaoUsuario
-import controllers.create_tbl           as create_tbl
-import controllers.user.usuarioCon      as usuarioCon
+import streamlit                            as st
+import pages.user.acesso                    as ValidacaoUsuario
 
 import pages.marketing.modulo_marketing     as modulo_marketing
 import pages.suprimentos.modulo_suprimentos as modulo_suprimentos
-
+import pages.comercial.modulo_comercial     as modulo_comercial
 
 # create_tbl.criar_tabelas_db()
 
@@ -237,6 +235,8 @@ if ValidacaoUsuario.authenticate_user():
         modulo_marketing.acesso_tela_mkt()
     elif area_selecionada == "Suprimentos":
         modulo_suprimentos.acesso_tela_suprimentos()
+    elif area_selecionada == "Comercial":
+        modulo_comercial.acesso_tela_comercial()
     else:
         st.error(f"Módulo do **{area_selecionada}** em manutenção")
         st.stop()
