@@ -22,7 +22,7 @@ def selecionarPeriodo():
         FROM
             tb_bi_periodo
         ORDER BY
-            periodo
+            periodo ASC
     """)
     customerList = []
 

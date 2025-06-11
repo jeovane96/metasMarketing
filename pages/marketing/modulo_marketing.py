@@ -1,4 +1,5 @@
 import pages.marketing.metas.createMetas      as createMetas
+import pages.marketing.metas.importarMetas    as importarMetas
 import pages.marketing.metas.listMetas        as listMetas
 import pages.marketing.periodo.createPeriodo  as createPeriodo
 import pages.marketing.periodo.listPeriodo    as listPeriodo
@@ -44,7 +45,8 @@ def acesso_tela_mkt():
         if st.session_state["active_page"] == "telaMetas":
             inserir, excluir, consultar = st.tabs(["Inserir", "Excluir", "Consultar"])
             with inserir:
-                createMetas.createMeta()
+                # createMetas.createMeta()
+                importarMetas.importMeta()
             with excluir:
                 pass
             with consultar:

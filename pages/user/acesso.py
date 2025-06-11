@@ -32,7 +32,7 @@ def authenticate_user():
             None
 
         with col2:
-            email        = st.text_input("**E-mail**", key="login_email")
+            email        = st.text_input("**E-mail**", key="login_email").lower()
             password     = st.text_input("**Senha**", type="password", key="login_password")
             area_acesso  = st.selectbox("**Área**", options=["Financeiro", "Recursos Humanos", "Suprimentos", "Engenharia", "Marketing", "Comercial", "Assistência Técnica"])
             login_button = st.button("Entrar")
