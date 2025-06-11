@@ -14,6 +14,7 @@ if "authenticated" in st.session_state and st.session_state["authenticated"]:
 # Exibir a logo
 st.markdown("""
     <div style="
+        background-color: #F2F2F2;
         display: flex; 
         align-items: center; 
         justify-content: center;
@@ -27,7 +28,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# CSS otimizado
+
 st.markdown("""
     <style>
     /* Esconder a barra branca do Streamlit */
@@ -233,10 +234,13 @@ if ValidacaoUsuario.authenticate_user():
 
     if area_selecionada == "Marketing":
         modulo_marketing.acesso_tela_mkt()
+
     elif area_selecionada == "Suprimentos":
         modulo_suprimentos.acesso_tela_suprimentos()
+
     elif area_selecionada == "Comercial":
         modulo_comercial.acesso_tela_comercial()
+        
     else:
         st.error(f"Módulo do **{area_selecionada}** em manutenção")
         st.stop()
