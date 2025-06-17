@@ -25,16 +25,6 @@ lista_meses_ano = [f"{mes}/{ano_atual}" for mes in meses]
 
 def createPeriodo():
 
-    # def ListEmpreendimentoFiltro():
-    #     customerList = []
-
-    #     for item in listEmpreendimentoCon.selecionarEmpreendimento():
-    #         customerList.append(item.empreendimento)
-
-    #     return customerList
-
-    # empreendimento_ = ListEmpreendimentoFiltro() 
-
     # Verifica se o usuário está autenticado
     if "authenticated" not in st.session_state or not st.session_state["authenticated"]:
         st.error("Você precisa estar autenticado.")

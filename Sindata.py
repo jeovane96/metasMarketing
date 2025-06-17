@@ -241,6 +241,9 @@ if ValidacaoUsuario.authenticate_user():
     elif area_selecionada == "Comercial":
         modulo_comercial.acesso_tela_comercial()
         
+    elif area_selecionada == "Relatório":
+        pass
+    
     else:
         st.error(f"Módulo do **{area_selecionada}** em manutenção")
         st.stop()

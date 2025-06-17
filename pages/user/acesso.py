@@ -39,7 +39,7 @@ def authenticate_user():
 
             if login_button:
                 with st.spinner("Autenticando..."):
-                    autenticado_usuario = usuarioCon.verificar_usuario(email, password)
+                    autenticado_usuario      = usuarioCon.verificar_usuario(email, password)
                     autenticado_usuario_area = usuarioCon.verificar_usuario_area(email, area_acesso)
                     time.sleep(3)
 

@@ -55,3 +55,11 @@ class comercial_metas:
         self.considera_bi               = considera_bi
         self.dt_insert                  = dt_insert
         self.user                       = user
+
+class eventos_auten:
+    def __init__(self, id, nm_evento, nm_projeto, id_fila, id_empreendimento):
+        self.id                 = id
+        self.nm_evento          = nm_evento
+        self.nm_projeto         = nm_projeto
+        self.id_fila            = id_fila
+        self.id_empreendimento  = id_empreendimento
