@@ -10,7 +10,7 @@ def insertMetas(insert_metas):
     cursor = conn.cursor()
     try:
         cursor.execute(""" 
-            INSERT INTO comercial_metas (
+            INSERT INTO tb_bi_comercial_metas (
                 periodo,                   
                 empreendimento,            
                 agrupamento_empreendimento,
